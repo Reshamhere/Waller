@@ -8,20 +8,29 @@
 import SwiftUI
 
 struct GalleryView: View {
-    var images = ["1", "2", "3", "4", "5"]
+    @StateObject var viewModel = PexelsViewModel()
+    
     var body: some View {
-        List(images, id: \.self) { image in
-                Image(image)
+        List(viewModel.photos) { photo in
+            AsyncImage(url: URL(string: photo.src.medium)) { image in
+                image
                     .resizable()
                     .frame(maxWidth: .infinity)
-                    .frame(height: 450)
+                    .frame(width: 300, height: 450)
                     .scaledToFit()
                     .cornerRadius(40)
+                    .clipped()
                     .padding(.horizontal, 20)
                 
+            } placeholder: {
+                ProgressView()
+            }
         }
-        .listStyle(.plain)
+        .listStyle(PlainListStyle())
         .padding(.top, 54)
+        .onAppear {
+            viewModel.fetchPhotos()
+        }
     }
 }
 
