@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GetStartedView: View {
+    @Binding var isShown: Bool
+    
     var body: some View {
         ZStack {
             Image("Images")
@@ -34,7 +36,7 @@ struct GetStartedView: View {
                     
                 
                 Button("Get Started") {
-                    
+                    isShown = true
                 }
                 .font(.system(size: 25).bold())
                 .tint(.black)
@@ -50,5 +52,5 @@ struct GetStartedView: View {
 }
 
 #Preview {
-    GetStartedView()
+    GetStartedView(isShown: .constant(false))
 }

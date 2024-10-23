@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("hasLaunchedBefore") var hasLaunchedBefore: Bool = false
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                
-                TabBarView()
-                SearchView()
-            }
-            .navigationTitle("Waller")
+        if hasLaunchedBefore {
+            MainView()
+        } else {
+            GetStartedView(isShown: $hasLaunchedBefore)
         }
-        
-        
     }
 }
 

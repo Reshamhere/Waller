@@ -14,9 +14,10 @@ struct GalleryView: View {
                 Image(image)
                     .resizable()
                     .frame(maxWidth: .infinity)
-                    .frame(height: 200)
+                    .frame(height: 450)
                     .scaledToFit()
                     .cornerRadius(40)
+                    .padding(.horizontal, 20)
                 
         }
         .listStyle(.plain)
