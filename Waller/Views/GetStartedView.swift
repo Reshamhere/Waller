@@ -21,7 +21,8 @@ struct GetStartedView: View {
             VStack {
                 Spacer()
                 Rectangle()
-                    .frame(width: .infinity, height: 350)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 350)
                     .foregroundColor(.black.opacity(0.8))
             }
             .ignoresSafeArea()
