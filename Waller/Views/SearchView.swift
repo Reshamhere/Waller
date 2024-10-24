@@ -13,65 +13,80 @@ struct SearchView: View {
 //    @State  var backgroundOpacity : Double
     
     var body: some View {
-        VStack {
-            if isSearching {
-                HStack {
-                    TextField("Search", text: $searchText)
-                        .padding()
-                        .padding(.horizontal, 20)
-//                        .background(Color(.systemGray6))
-                        .background(.white)
-                        .cornerRadius(40)
-                        .transition(.move(edge: .trailing))
-                        .animation(.easeInOut, value: isSearching)
-                    
-                    Button {
-                        withAnimation {
-                            isSearching = false
-                            searchText = ""
-//                            backgroundOpacity = 0
+        ZStack {
+            // Fading background overlay
+                        if isSearching {
+                            Color.black.opacity(0.4)
+                                .ignoresSafeArea()
+                                .transition(.opacity)
+                                .animation(.easeInOut, value: isSearching)
+                                .onTapGesture {
+                                    withAnimation {
+                                        isSearching = false
+                                        searchText = ""
+                                    }
+                                }
                         }
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-//                            .foregroundColor(.gray)
-                            .foregroundColor(.black)
-                            .padding(.trailing, 10)
-                    }
-                    
-                }
-                .padding(.horizontal)
-//                .padding(.top, 10)
-            } else {
-                HStack {
-                    Spacer()
-                    
-                    Button {
-                        withAnimation {
-                            isSearching = true
-//                            backgroundOpacity = 0.5
-                        }
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .tint(.black)
+            VStack {
+                if isSearching {
+                    HStack {
+                        TextField("Search", text: $searchText)
                             .padding()
-                            .padding(.horizontal)
+                            .padding(.horizontal, 20)
+                            .background(Color(.systemGray6))
+                            .background(.white)
+                            .cornerRadius(40)
+                            .transition(.move(edge: .trailing))
+                            .animation(.easeInOut, value: isSearching)
+                        
+                        Button {
+                            withAnimation {
+                                isSearching = false
+                                searchText = ""
+                                //                            backgroundOpacity = 0
+                            }
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            //                            .foregroundColor(.gray)
+                                .foregroundColor(.black)
+                                .padding(.trailing, 10)
+                        }
+                        
                     }
+                    .padding(.horizontal)
+                    //                .padding(.top, 10)
+                } else {
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            withAnimation {
+                                isSearching = true
+                                //                            backgroundOpacity = 0.5
+                            }
+                        } label: {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .tint(.black)
+                                .padding()
+                                .padding(.horizontal)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 52)
+                    .background(.white)
+                    //                .shadow(radius: 10)
+                    //                .padding(.horizontal)
+                    //                .padding(.top, 10)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 52)
-                .background(.white)
-//                .shadow(radius: 10)
-//                .padding(.horizontal)
-//                .padding(.top, 10)
-            }
+                
+                Spacer()
+            } // end of Vstack
             
-            Spacer()
-        } // end of Vstack
-        
+        }
     }
 }
 
