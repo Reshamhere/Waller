@@ -17,6 +17,9 @@
 		50A9C6E72CC96165002E21CA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9C6E62CC96165002E21CA /* MainView.swift */; };
 		50A9C6E92CC96A06002E21CA /* PexelsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9C6E82CC96A06002E21CA /* PexelsResponse.swift */; };
 		50A9C6EB2CC97195002E21CA /* PexelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9C6EA2CC97195002E21CA /* PexelsViewModel.swift */; };
+		50AB1E3D2CCA6B5000D2D82A /* BlurHashEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AB1E3B2CCA6B4F00D2D82A /* BlurHashEncode.swift */; };
+		50AB1E3E2CCA6B5000D2D82A /* BlurHashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AB1E3C2CCA6B5000D2D82A /* BlurHashDecode.swift */; };
+		50CC66AF2CCF8176003F60B4 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CC66AE2CCF8176003F60B4 /* PhotoView.swift */; };
 		50EF6F882CC4F92B004E71B7 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EF6F872CC4F92B004E71B7 /* GalleryView.swift */; };
 		50EF6F8A2CC4F967004E71B7 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EF6F892CC4F967004E71B7 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
@@ -33,6 +36,9 @@
 		50A9C6E62CC96165002E21CA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		50A9C6E82CC96A06002E21CA /* PexelsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsResponse.swift; sourceTree = "<group>"; };
 		50A9C6EA2CC97195002E21CA /* PexelsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsViewModel.swift; sourceTree = "<group>"; };
+		50AB1E3B2CCA6B4F00D2D82A /* BlurHashEncode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurHashEncode.swift; sourceTree = "<group>"; };
+		50AB1E3C2CCA6B5000D2D82A /* BlurHashDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurHashDecode.swift; sourceTree = "<group>"; };
+		50CC66AE2CCF8176003F60B4 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		50EF6F872CC4F92B004E71B7 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		50EF6F892CC4F967004E71B7 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +73,8 @@
 		507E4B642CC2F8C200B54EAD /* Waller */ = {
 			isa = PBXGroup;
 			children = (
+				50AB1E3C2CCA6B5000D2D82A /* BlurHashDecode.swift */,
+				50AB1E3B2CCA6B4F00D2D82A /* BlurHashEncode.swift */,
 				507E4B6B2CC2F8C400B54EAD /* Preview Content */,
 				507E4B782CC2FA1700B54EAD /* Others */,
 				507E4B772CC2FA0300B54EAD /* ViewModels */,
@@ -94,6 +102,7 @@
 				509E99F62CC6D139007A86EE /* SearchView.swift */,
 				509A95C52CC6E395003307FA /* GetStartedView.swift */,
 				50A9C6E62CC96165002E21CA /* MainView.swift */,
+				50CC66AE2CCF8176003F60B4 /* PhotoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -167,6 +176,8 @@
 				Base,
 			);
 			mainGroup = 507E4B592CC2F8C200B54EAD;
+			packageReferences = (
+			);
 			productRefGroup = 507E4B632CC2F8C200B54EAD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -194,10 +205,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				50EF6F8A2CC4F967004E71B7 /* FavoritesView.swift in Sources */,
+				50CC66AF2CCF8176003F60B4 /* PhotoView.swift in Sources */,
 				50A9C6E72CC96165002E21CA /* MainView.swift in Sources */,
 				50A9C6EB2CC97195002E21CA /* PexelsViewModel.swift in Sources */,
 				507E4B682CC2F8C200B54EAD /* ContentView.swift in Sources */,
+				50AB1E3E2CCA6B5000D2D82A /* BlurHashDecode.swift in Sources */,
 				507E4B752CC2F97F00B54EAD /* TabBarView.swift in Sources */,
+				50AB1E3D2CCA6B5000D2D82A /* BlurHashEncode.swift in Sources */,
 				507E4B662CC2F8C200B54EAD /* WallerApp.swift in Sources */,
 				509A95C62CC6E395003307FA /* GetStartedView.swift in Sources */,
 				50A9C6E92CC96A06002E21CA /* PexelsResponse.swift in Sources */,

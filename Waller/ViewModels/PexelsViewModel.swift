@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 ///  fetching api response
 
@@ -15,7 +16,7 @@ class PexelsViewModel: ObservableObject {
     private let apikey = "nohW27EgGrsb1X65efEJ6ynlt2DCCfrnFChDB6HvGnjxTGl6a9JOn8Rj"
     
     func fetchPhotos() {
-        guard let url = URL(string: "https://api.pexels.com/v1/search?query=nature&orientation=portrait") else {
+        guard let url = URL(string: "https://api.pexels.com/v1/search?query=natur&orientation=portrait") else {
             return
         }
         

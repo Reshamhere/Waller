@@ -8,16 +8,9 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @State private var selection = 0
+    @Binding var selection: Int
     
     var body: some View {
-        
-            if selection == 0 {
-                GalleryView()
-            } else if selection == 1 {
-                FavoritesView()
-            }
-
             VStack {
                 Spacer()
                 
@@ -60,6 +53,6 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView()
+    TabBarView(selection: .constant(0))
 }
 
