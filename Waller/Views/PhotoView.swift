@@ -22,8 +22,9 @@ struct PhotoView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black.opacity(0.8))
-            .cornerRadius(20)
-            .padding()
+//            .cornerRadius(20)
+            .padding(.bottom, 10)
+            .ignoresSafeArea()
             
             VStack {
                 Text(photo.photographer ?? "John Doe")
@@ -35,6 +36,10 @@ struct PhotoView: View {
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                             .font(.title)
+                            .tint(.black)
+                            .frame(width: 55, height: 55)
+                            .background(.gray.opacity(0.15))
+                            .cornerRadius(50)
                             .padding()
                     }
                     
@@ -44,8 +49,8 @@ struct PhotoView: View {
                     }
                     label : {
                         Text("Download")
-                            .font(.title2).bold()
-                            .frame(width: 150, height: 50)
+                            .font(.title2)
+                            .frame(width: 170, height: 60)
                             .background(.red)
                             .cornerRadius(30)
                             .foregroundStyle(.white)
@@ -58,6 +63,10 @@ struct PhotoView: View {
                     } label: {
                         Image(systemName: "heart")
                             .font(.title)
+                            .tint(.black)
+                            .frame(width: 55, height: 55)
+                            .background(.gray.opacity(0.15))
+                            .cornerRadius(50)
                             .padding()
                     }
                     

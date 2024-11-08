@@ -10,14 +10,16 @@ import SwiftUI
 struct MainView: View {
     @State var selection = 0
     var body: some View {
-        ZStack {
-            if selection == 0 {
-                GalleryView()
-            } else if selection == 1 {
-                FavoritesView()
+        NavigationStack {
+            ZStack {
+                if selection == 0 {
+                    GalleryView()
+                } else if selection == 1 {
+                    FavoritesView()
+                }
+                TabBarView(selection: $selection)
+                SearchView()
             }
-            TabBarView(selection: $selection)
-            SearchView()
         }
     }
 }
