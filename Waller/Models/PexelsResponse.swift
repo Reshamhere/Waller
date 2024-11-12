@@ -20,6 +20,7 @@ struct Photo: Codable, Identifiable {
 //    var blurHash: String?
     let photographer: String?
     let photographerId: Int?
+    let alt: String?
     let photographerUrl: String?
     var liked: Bool?
     
@@ -28,8 +29,9 @@ struct Photo: Codable, Identifiable {
                 id: 1,
                 url: "",
                 src: Src(medium: "", large: ""),
-                photographer: "",
+                photographer: "John doe",
                 photographerId: 1,
+                alt: "Description of the image",
                 photographerUrl: "",
                 liked: false
             )

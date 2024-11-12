@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
+    @StateObject var viewModel = PexelsViewModel()
     @State var selection = 0
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 if selection == 0 {
-                    GalleryView()
+                    GalleryView(viewModel: viewModel)
                 } else if selection == 1 {
                     FavoritesView()
                 }
                 TabBarView(selection: $selection)
-                SearchView()
+//                SearchView(viewModel: viewModel)
             }
         }
     }
@@ -26,4 +29,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .modelContainer(for: LikedPhoto.self)
 }

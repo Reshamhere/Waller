@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
+    @StateObject var viewModel: PexelsViewModel
     @State private var isSearching = false
     @State private var searchText = ""
 //    @State  var backgroundOpacity : Double
@@ -15,22 +16,24 @@ struct SearchView: View {
     var body: some View {
         ZStack {
             // Fading background overlay
-                        if isSearching {
-                            Color.black.opacity(0.4)
-                                .ignoresSafeArea()
-                                .transition(.opacity)
-                                .animation(.easeInOut, value: isSearching)
-                                .onTapGesture {
-                                    withAnimation {
-                                        isSearching = false
-                                        searchText = ""
-                                    }
-                                }
+            if isSearching {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                    .animation(.easeInOut, value: isSearching)
+                    .onTapGesture {
+                        withAnimation {
+                            isSearching = false
+                            searchText = ""
                         }
+                    }
+            }
             VStack {
                 if isSearching {
                     HStack {
-                        TextField("Search", text: $searchText)
+                        TextField("Search", text: $searchText, onCommit: {
+                            viewModel.fetchPhotos(query: searchText)
+                        })
                             .padding()
                             .padding(.horizontal, 20)
                             .background(Color(.systemGray6))
@@ -42,8 +45,8 @@ struct SearchView: View {
                         Button {
                             withAnimation {
                                 isSearching = false
-                                searchText = ""
-                                //                            backgroundOpacity = 0
+//                                searchText = ""
+//                            backgroundOpacity = 0
                             }
                         } label: {
                             Image(systemName: "xmark.circle.fill")
@@ -91,5 +94,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(viewModel: PexelsViewModel())
 }

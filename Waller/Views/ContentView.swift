@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     @AppStorage("hasLaunchedBefore") var hasLaunchedBefore: Bool = false
@@ -19,9 +20,7 @@ struct ContentView: View {
     }
 }
 
-
-
-
 #Preview {
     ContentView()
+        .modelContainer(for: LikedPhoto.self)
 }
