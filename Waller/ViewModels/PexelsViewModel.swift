@@ -11,9 +11,18 @@ import SwiftUI
 class PexelsViewModel: ObservableObject {
     @Published var photos: [Photo] = []
     @Published var lastQuery: String?
+    
+    func getAPIKey() -> String? {
+        if let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path),
+           let apiKey = dict["API_KEY"] as? String {
+            return apiKey
+        }
+        return nil // Return nil if the API key is not found
+    }
 
     func fetchPhotos(query: String? = nil) {
-        let apiKey = "nohW27EgGrsb1X65efEJ6ynlt2DCCfrnFChDB6HvGnjxTGl6a9JOn8Rj" // Replace with your actual Pexels API key
+        let apiKey = getAPIKey() // Replace with your actual Pexels API key
         var urlString: String
 
         if let query = query {
@@ -66,7 +75,7 @@ class PexelsViewModel: ObservableObject {
 //    @Published var photos: [Photo] = []
 //    @Published var lastQuery: String?
 //    
-//    private let apikey = "nohW27EgGrsb1X65efEJ6ynlt2DCCfrnFChDB6HvGnjxTGl6a9JOn8Rj"
+//    private let apikey = ""
 //    
 //    func fetchPhotos(query: String = "nature") {
 //        let query = query.isEmpty ? "nature" : query
