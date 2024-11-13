@@ -43,7 +43,10 @@ struct GalleryView: View {
                     .padding(.top, scrollOffset < -20 ? 0 : 54) // Changepadding based on scroll offset
                 }
                 .onAppear {
-                    viewModel.fetchPhotos()
+                    // Only fetch if photos are empty (i.e., initial load)
+                    if viewModel.photos.isEmpty {
+                        viewModel.fetchPhotos(query: viewModel.lastQuery)
+                    }
                 }
                 .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
                     scrollOffset = value
@@ -66,5 +69,5 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
 
 #Preview {
     GalleryView(viewModel: PexelsViewModel())
-        .modelContainer(for: LikedPhoto.self, inMemory: true)
+        .modelContainer(for: LikedPhoto.self)
 }

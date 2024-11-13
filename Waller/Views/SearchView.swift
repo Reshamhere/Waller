@@ -20,7 +20,7 @@ struct SearchView: View {
                 Color.black.opacity(0.4)
                     .ignoresSafeArea()
                     .transition(.opacity)
-                    .animation(.easeInOut, value: isSearching)
+                    .animation(.spring(), value: isSearching)
                     .onTapGesture {
                         withAnimation {
                             isSearching = false
@@ -31,9 +31,16 @@ struct SearchView: View {
             VStack {
                 if isSearching {
                     HStack {
-                        TextField("Search", text: $searchText, onCommit: {
-                            viewModel.fetchPhotos(query: searchText)
-                        })
+                        TextField("Search", text: $searchText)
+                            .submitLabel(.search)
+                            .onSubmit {
+                                if !searchText.isEmpty {
+                                    viewModel.fetchPhotos(query: searchText)
+                                    withAnimation {
+                                        isSearching = false
+                                    }
+                                }
+                            }
                             .padding()
                             .padding(.horizontal, 20)
                             .background(Color(.systemGray6))
@@ -45,7 +52,7 @@ struct SearchView: View {
                         Button {
                             withAnimation {
                                 isSearching = false
-//                                searchText = ""
+                                searchText = ""
 //                            backgroundOpacity = 0
                             }
                         } label: {
