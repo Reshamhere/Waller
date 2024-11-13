@@ -65,7 +65,6 @@
 		507E4B592CC2F8C200B54EAD = {
 			isa = PBXGroup;
 			children = (
-				50965D2D2CE4B50E0067AE9F /* .gitignore */,
 				507E4B642CC2F8C200B54EAD /* Waller */,
 				507E4B632CC2F8C200B54EAD /* Products */,
 			);
@@ -87,6 +86,7 @@
 				507E4B6B2CC2F8C400B54EAD /* Preview Content */,
 				507E4B782CC2FA1700B54EAD /* Others */,
 				507E4B772CC2FA0300B54EAD /* ViewModels */,
+				50965D2D2CE4B50E0067AE9F /* .gitignore */,
 				507E4B762CC2F9FC00B54EAD /* Models */,
 				507E4B732CC2F91A00B54EAD /* Views */,
 			);
