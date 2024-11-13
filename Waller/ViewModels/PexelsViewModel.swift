@@ -13,7 +13,7 @@ class PexelsViewModel: ObservableObject {
     @Published var lastQuery: String?
     
     func getAPIKey() -> String? {
-        if let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+        if let path = Bundle.main.path(forResource: "config", ofType: "plist"),
            let dict = NSDictionary(contentsOfFile: path),
            let apiKey = dict["API_KEY"] as? String {
             return apiKey
