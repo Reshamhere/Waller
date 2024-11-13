@@ -4,6 +4,17 @@
 
 ---
 
+## Table of Contents
+
+- ✨ [Features](#features)
+- 🖼️ [Screenshots](#screenshots)
+- ⚙️ [Installation & Setup Guide](#installation--setup-guide)
+- 🛠️ [Technologies Used](#technologies-used)
+- 📚 [Key Learnings](#key-learnings)
+- 🔮 [Future Improvements](#future-improvements)
+
+---
+
 ## Features
 
 - **Getting Started Page**: Welcomes the user.
