@@ -59,21 +59,18 @@ struct PhotoView: View {
                     .padding(.horizontal, 20)
                 
                 HStack {
-                    Button{
-                        // share
-                    } label: {
+                    ShareLink(item: photo.url) {
                         Image(systemName: "square.and.arrow.up")
                             .font(.title)
                             .tint(.black)
                             .frame(width: 55, height: 55)
                             .background(.gray.opacity(0.15))
                             .cornerRadius(50)
-                            .padding()
+                            .padding(.leading, 20)
                     }
-                    
+ 
                     Button(){
                         // action for download
-//                        downloadImage()
                         requestPhotoLibraryAccess()
                     }
                     label : {
@@ -103,12 +100,9 @@ struct PhotoView: View {
                             .frame(width: 55, height: 55)
                             .background(.gray.opacity(0.15))
                             .cornerRadius(50)
-                            .padding()
+                            .padding(.trailing, 20)
                     }
-                    
-                    
-                    
-                }
+                } // end of Hstack
             }
             
         } // end of outer VStack
@@ -139,8 +133,6 @@ struct PhotoView: View {
                 downloadImage()
             case .denied, .restricted:
                 DispatchQueue.main.async {
-//                    alertMessage = "Please allow access to Photos in Settings to save images"
-//                    showAlert = true
                     showSettingsAlert = true
                 }
             case .notDetermined:
