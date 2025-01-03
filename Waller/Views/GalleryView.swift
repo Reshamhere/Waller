@@ -7,10 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import EasySkeleton
 
 struct GalleryView: View {
     @StateObject var viewModel : PexelsViewModel
     @State private var scrollOffset: CGFloat = 0.0 // Track the offset of the scroll
+    @State private var isLoading: Bool = true
 
     var body: some View {
         NavigationView {
@@ -35,17 +37,22 @@ struct GalleryView: View {
                                         .clipped()
                                         .padding( 20)
                                 } placeholder: {
-                                    ProgressView()
+                                    SkeletonPlaceholder()
                                 }
                             }
                         }
                     }
+                    .skeletonable() // Make the VStack skeletonable
+                    .setSkeleton($isLoading) // Control skeleton state
                     .padding(.top, scrollOffset < -20 ? 0 : 54) // Changepadding based on scroll offset
                 }
                 .onAppear {
-                    // Only fetch if photos are empty (i.e., initial load)
+                    /// Only fetch if photos are empty (i.e., initial load)
                     if viewModel.photos.isEmpty {
                         viewModel.fetchPhotos(query: viewModel.lastQuery)
+                        isLoading = false
+                    } else {
+                        isLoading = false
                     }
                 }
                 .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
@@ -56,6 +63,15 @@ struct GalleryView: View {
             } // end of ZStack
         } // end of navigation view
     } // end of body
+}
+
+struct SkeletonPlaceholder: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 40)
+            .fill(Color.gray.opacity(0.3))
+            .frame(width: 300, height: 450)
+            .skeletonable()
+    }
 }
 
 // Custom preference key to track scroll offset

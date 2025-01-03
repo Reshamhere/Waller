@@ -27,7 +27,7 @@ struct Photo: Codable, Identifiable {
     static var samplePhoto: Photo {
             return Photo(
                 id: 1,
-                url: "",
+                url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
                 src: Src(medium: "", large: ""),
                 photographer: "John doe",
                 photographerId: 1,

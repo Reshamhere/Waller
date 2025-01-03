@@ -14,30 +14,48 @@ struct FavoritesView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(likedPhotos) { likedPhoto in
-                    NavigationLink(destination: PhotoView(photo: convertToPhoto(likedPhoto))) {
-                        VStack(alignment: .leading) {
-                            AsyncImage(url: URL(string: likedPhoto.url)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                            } placeholder: {
-                                ProgressView()
+            VStack {
+                if likedPhotos.isEmpty {
+                    Image("sadcat")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 80)
+                        .offset(y: -40)
+                    
+                    Text("Seems like you don't have any favorites yet!")
+                        .foregroundStyle(.pink)
+                        .font(.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .offset(y: -50)
+                        .padding(.horizontal, 10)
+                } else {
+                    List {
+                        ForEach(likedPhotos) { likedPhoto in
+                            NavigationLink(destination: PhotoView(photo: convertToPhoto(likedPhoto))) {
+                                VStack(alignment: .leading) {
+                                    AsyncImage(url: URL(string: likedPhoto.url)) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.black.opacity(0.2))
+                                    .cornerRadius(10)
+                                    .padding(.vertical, 8)
+                                    
+                                    Text(likedPhoto.photographer ?? "Unknown Photographer")
+                                        .font(.headline)
+                                    Text(likedPhoto.alt ?? "No Description")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding()
                             }
-                            .frame(maxWidth: .infinity)
-                            .background(Color.black.opacity(0.2))
-                            .cornerRadius(10)
-                            .padding(.vertical, 8)
-                            
-                            Text(likedPhoto.photographer ?? "Unknown Photographer")
-                                .font(.headline)
-                            Text(likedPhoto.alt ?? "No Description")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
                         }
-                        .padding()
                     }
+                    
                 }
             }
             .navigationTitle("Favorites")

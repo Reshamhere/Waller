@@ -8,16 +8,21 @@
 import SwiftUI
 import PhotosUI
 import SwiftData
+import AlertToast
 
 struct PhotoView: View {
     
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var isLiked = false // Track if photo is liked
     @State private var isDownloading = false // Track download state
     @State private var showAlert = false // For showing success/error alerts
     @State private var alertMessage = "" // Alert message text
     @State private var showSettingsAlert = false // For showing settings alert
+    @State private var showBackButton = false
+    
+    @State private var showToast = false
     
     var photo: Photo
     
@@ -29,32 +34,38 @@ struct PhotoView: View {
 //                    .scaledToFit()
                     .imageScale(.large)
             } placeholder: {
-                ProgressView()
+//                ProgressView()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.opacity(0.8))
+            .background(Color.black.opacity(0.6))
 //            .cornerRadius(20)
             .padding(.bottom, 10)
             .ignoresSafeArea()
             
             VStack(alignment: .leading) {
                 HStack{
-                    Image(systemName: "person.circle.fill")
-                        .font(.system(size: 45))
-                        .padding(.horizontal,6)
-                    
-                    VStack(alignment: .leading) {
-                        Text(photo.photographer ?? "John Doe")
-                            .font(.title.bold())
-                        Text("\(photo.photographerId ?? 0)")
+                    AsyncImage(url: URL(string: photo.src.medium)) { image in
+                        image
+                            .resizable()
+//                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(100)
+                    } placeholder: {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 45))
+                            .padding(.horizontal,6)
                     }
-//                    .padding(.horizontal)
+                    
+                    Text(photo.photographer ?? "John Doe")
+                        .font(.title.bold())
+                    
                     Spacer()
                 }
                 .padding()
                 
                 Text(photo.alt ?? "desc")
-                    .font(.system(size: 23).bold())
+                    .font(.system(size: 20))
+                    .opacity(0.7)
                     .padding(.bottom, 20)
                     .padding(.horizontal, 20)
                 
@@ -106,10 +117,8 @@ struct PhotoView: View {
             }
             
         } // end of outer VStack
-        .alert("Download Status", isPresented: $showAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text(alertMessage)
+        .toast(isPresenting: $showToast) {
+            AlertToast(displayMode: .hud, type: .regular, title: alertMessage)
         }
         .alert("Photos Access Required", isPresented: $showSettingsAlert) {
             Button("Cancel", role: .cancel) { }
@@ -123,7 +132,28 @@ struct PhotoView: View {
         }
         .onAppear {
             checkIfLiked()
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                showBackButton = true
+            }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                if showBackButton {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 15).bold())
+                            .foregroundColor(.black)
+                            .frame(width: 40, height: 40)
+                            .background(.white)
+                            .cornerRadius(100)
+                    }
+                }
+            }
+        }
+        
     } // end of body
     
     private func requestPhotoLibraryAccess() {
@@ -148,7 +178,8 @@ struct PhotoView: View {
         guard let imageUrl = URL(string: photo.src.large) else {
             DispatchQueue.main.async {
                 alertMessage = "Invalid image URL"
-                showAlert = true
+//                showAlert = true
+                showToast = true
             }
             return
         }
@@ -161,21 +192,24 @@ struct PhotoView: View {
             DispatchQueue.main.async {
                 if let error = error {
                     alertMessage = "Download failed: \(error.localizedDescription)"
-                    showAlert = true
+//                    showAlert = true
+                    showToast = true
                     isDownloading = false
                     return
                 }
                 
                 guard let data = data, let image = UIImage(data: data) else {
                     alertMessage = "Failed to create image from downloaded data"
-                    showAlert = true
+//                    showAlert = true
+                    showToast = true
                     isDownloading = false
                     return
                 }
                 
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 alertMessage = "Image saved successfully!"
-                showAlert = true
+//                showAlert = true
+                showToast = true
                 isDownloading = false
             }
         }.resume()
